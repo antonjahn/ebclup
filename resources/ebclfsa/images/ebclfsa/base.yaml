@@ -1,0 +1,26 @@
+use_ebcl_apt: true
+# Additional apt repos
+apt_repos:
+ # Required for libarchive-zip-perl
+  - apt_repo: http://ports.ubuntu.com/ubuntu-ports
+    distro: jammy
+    components:
+      - main
+  # Get latest security fixes
+  - apt_repo: http://ports.ubuntu.com/ubuntu-ports
+    distro: jammy-security
+    components:
+      - main
+      - universe
+  # Get latest public ebclfsa packages
+  - apt_repo: https://linux.elektrobit.com/eb-corbos-linux/1.4
+    gpg: /etc/apt/trusted.gpg.d/elektrobit.gpg
+    distro: ebclfsa
+    components:
+      - dev
+  # Get latest proprietary ebclfsa packages
+  - apt_repo: https://repos.ebgroup.elektrobit.com/bart:/1.0:/lisa-sdk-release/xUbuntu_22.04_debbuild
+    directory: .
+    key: https://repos.ebgroup.elektrobit.com/bart:/1.0:/lisa-sdk-release/xUbuntu_22.04_debbuild/Release.key
+# CPU architecture
+arch: arm64

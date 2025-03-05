@@ -1,3 +1,7 @@
 {
-	"image": "ghcr.io/elektrobit/ebcl_dev_container:v1.4.13"
+	"image": "ghcr.io/elektrobit/ebcl_dev_container:v1.4.13",
+	"remoteUser": "ebcl",
+	"privileged": true,
+	"workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
+	"workspaceFolder": "/workspace"
 }
