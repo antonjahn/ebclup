@@ -15,11 +15,12 @@ struct Cli {
 enum Project {
     Ebcl,
     Ebclfsa,
+    Scratch,
 }
 
 #[derive(Subcommand)]
 enum Commands {
-    StartProject {
+    Startproject {
         #[arg(value_enum)]
         project: Project,
 
@@ -36,6 +37,7 @@ enum Commands {
 // Embed project template in the binary
 const PROJECT_EBCL: &[u8] = include_bytes!("../resources/ebcl.tar.gz");
 const PROJECT_EBCLFSA: &[u8] = include_bytes!("../resources/ebclfsa.tar.gz");
+const PROJECT_SCRATCH: &[u8] = include_bytes!("../resources/scratch.tar.gz");
 
 fn extract_project(template: &[u8], name: &str) -> std::io::Result<()> {
     let tar = GzDecoder::new(Cursor::new(template));
@@ -48,7 +50,7 @@ fn main() {
     let cli = Cli::parse();
 
     match &cli.command {
-        Commands::StartProject { project, name } => match project {
+        Commands::Startproject { project, name } => match project {
             Project::Ebcl => {
                 println!("Starting ebcl project, with name {}", name);
                 extract_project(PROJECT_EBCL, name).expect("Failed to extract project");
@@ -56,6 +58,10 @@ fn main() {
             Project::Ebclfsa => {
                 println!("Starting ebclfsa project, with name {}", name);
                 extract_project(PROJECT_EBCLFSA, name).expect("Failed to extract project");
+            }
+            Project::Scratch => {
+                println!("Starting scratch project, with name {}", name);
+                extract_project(PROJECT_SCRATCH, name).expect("Failed to extract project");
             }
         },
         Commands::Completions { shell } => {
