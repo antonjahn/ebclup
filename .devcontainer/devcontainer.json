@@ -1,11 +1,6 @@
 {
     "name": "Rust Development Environment",
-    "build": {
-        "dockerfile": "Dockerfile",
-        "args": {
-            "VARIANT": "bookworm"
-        }
-    },
+    "image": "mcr.microsoft.com/vscode/devcontainers/rust:dev-bookworm",
     "customizations": {
         "vscode": {
             "extensions": [
