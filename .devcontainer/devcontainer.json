@@ -1,0 +1,12 @@
+{
+    "name": "Rust Development Environment",
+    "image": "mcr.microsoft.com/vscode/devcontainers/rust:dev-bookworm",
+    "postCreateCommand": "cargo install cargo-release",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "rust-lang.rust-analyzer"
+            ]
+        }
+    }
+}
