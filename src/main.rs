@@ -20,13 +20,15 @@ enum Project {
 
 #[derive(Subcommand)]
 enum Commands {
+    /// Start a new project from a template or example
     Startproject {
+        /// the starter template/example for your project
         #[arg(value_enum)]
         project: Project,
-
+        /// the name of your project
         name: String,
     },
-    /// generates shell completions
+    /// Generate shell completions
     Completions {
         /// the shell to generate completions for
         #[arg(value_enum)]
