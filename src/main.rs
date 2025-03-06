@@ -35,9 +35,9 @@ enum Commands {
 }
 
 // Embed project template in the binary
-const PROJECT_EBCL: &[u8] = include_bytes!("../resources/ebcl.tar.gz");
-const PROJECT_EBCLFSA: &[u8] = include_bytes!("../resources/ebclfsa.tar.gz");
-const PROJECT_SCRATCH: &[u8] = include_bytes!("../resources/scratch.tar.gz");
+const PROJECT_EBCL: &[u8] = include_bytes!(concat!(env!("OUT_DIR"), "ebcl.tar.gz"));
+const PROJECT_EBCLFSA: &[u8] = include_bytes!(concat!(env!("OUT_DIR"), "ebclfsa.tar.gz"));
+const PROJECT_SCRATCH: &[u8] = include_bytes!(concat!(env!("OUT_DIR"), "scratch.tar.gz"));
 
 fn extract_project(template: &[u8], name: &str) -> std::io::Result<()> {
     let tar = GzDecoder::new(Cursor::new(template));

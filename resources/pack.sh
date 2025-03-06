@@ -4,5 +4,5 @@
 
 for dir in */; do
     dir=${dir%*/}
-    tar -czf "${dir}.tar.gz" -C "${dir%*/}" .
+    tar -czf ${OUT_DIR}"${dir}.tar.gz" -C "${dir%*/}" .
 done
