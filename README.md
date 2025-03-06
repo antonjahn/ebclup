@@ -1,6 +1,6 @@
 # ebclup
 
-Utility script for EB corbos Linux projects to start new projects.
+Kickstart projects based on EB corbos templates and examples.
 
 ## Installation
 
@@ -8,9 +8,10 @@ Currently only supports Linux.
 
 Download latest release from https://github.com/antonjahn/ebclup/releases
 
+```bash
 chmod +x ebclup
-
 sudo mv ebclup /usr/local/bin/
+```
 
 ## Usage
 
