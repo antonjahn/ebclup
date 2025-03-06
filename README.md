@@ -4,13 +4,16 @@ Kickstart projects based on EB corbos templates and examples.
 
 ## Installation
 
-Currently only supports Linux.
+Currently only provided for Linux amd64.
 
 Download latest release from https://github.com/antonjahn/ebclup/releases
 
 ```bash
 chmod +x ebclup
+# Optional: move to an accessible PATH
 sudo mv ebclup /usr/local/bin/
+# Optional: completion for your shell, e.g.
+ebclup completions bash | sudo tee /etc/bash_completion.d/ebclup
 ```
 
 ## Usage
