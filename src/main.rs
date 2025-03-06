@@ -12,19 +12,22 @@ struct Cli {
 }
 
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, ValueEnum)]
-enum Project {
+enum Template {
+    /// customizable QEMU-based image based on ebcl packages and crinit
     Ebcl,
+    /// demo application and QEMU-based image based on ebclfsa and eb-hv
     Ebclfsa,
+    /// empty project with a devcontainer
     Scratch,
 }
 
 #[derive(Subcommand)]
 enum Commands {
-    /// Start a new project from a template or example
+    /// Start a new project from EB corbos based examples
     Startproject {
-        /// the starter template/example for your project
+        /// the starting point for your project
         #[arg(value_enum)]
-        project: Project,
+        template: Template,
         /// the name of your project
         name: String,
     },
@@ -48,11 +51,11 @@ fn extract_project(template: &[u8], name: &str) -> std::io::Result<()> {
     Ok(())
 }
 
-fn start_project(project: Project, name: &str) {
+fn start_project(project: Template, name: &str) {
     let (project_name, template) = match project {
-        Project::Ebcl => ("ebcl", PROJECT_EBCL),
-        Project::Ebclfsa => ("ebclfsa", PROJECT_EBCLFSA),
-        Project::Scratch => ("scratch", PROJECT_SCRATCH),
+        Template::Ebcl => ("ebcl", PROJECT_EBCL),
+        Template::Ebclfsa => ("ebclfsa", PROJECT_EBCLFSA),
+        Template::Scratch => ("scratch", PROJECT_SCRATCH),
     };
     println!("Starting {} project, with name {}", project_name, name);
     extract_project(template, name).expect("Failed to extract project");
@@ -62,7 +65,10 @@ fn main() {
     let cli = Cli::parse();
 
     match &cli.command {
-        Commands::Startproject { project, name } => start_project(*project, name),
+        Commands::Startproject {
+            template: project,
+            name,
+        } => start_project(*project, name),
         Commands::Completions { shell } => {
             let mut app = Cli::command();
             let bin_name = app.get_name().to_string();
