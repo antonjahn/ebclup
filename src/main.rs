@@ -46,24 +46,21 @@ fn extract_project(template: &[u8], name: &str) -> std::io::Result<()> {
     Ok(())
 }
 
+fn start_project(project: Project, name: &str) {
+    let (project_name, template) = match project {
+        Project::Ebcl => ("ebcl", PROJECT_EBCL),
+        Project::Ebclfsa => ("ebclfsa", PROJECT_EBCLFSA),
+        Project::Scratch => ("scratch", PROJECT_SCRATCH),
+    };
+    println!("Starting {} project, with name {}", project_name, name);
+    extract_project(template, name).expect("Failed to extract project");
+}
+
 fn main() {
     let cli = Cli::parse();
 
     match &cli.command {
-        Commands::Startproject { project, name } => match project {
-            Project::Ebcl => {
-                println!("Starting ebcl project, with name {}", name);
-                extract_project(PROJECT_EBCL, name).expect("Failed to extract project");
-            }
-            Project::Ebclfsa => {
-                println!("Starting ebclfsa project, with name {}", name);
-                extract_project(PROJECT_EBCLFSA, name).expect("Failed to extract project");
-            }
-            Project::Scratch => {
-                println!("Starting scratch project, with name {}", name);
-                extract_project(PROJECT_SCRATCH, name).expect("Failed to extract project");
-            }
-        },
+        Commands::Startproject { project, name } => start_project(*project, name),
         Commands::Completions { shell } => {
             let mut app = Cli::command();
             let bin_name = app.get_name().to_string();
