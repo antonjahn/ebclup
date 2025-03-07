@@ -12,4 +12,7 @@ clap_complete = "4.5.46"
 flate2 = "1.1.0"
 tar = "0.4.44"
 
+[dev-dependencies]
+assert_cmd = "2.0.16"
+
 [build-dependencies]
